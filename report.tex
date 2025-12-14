@@ -1,0 +1,233 @@
+\documentclass[11pt, a4paper]{article}  % Set default font and page size
+
+
+% Load packages and configure them via options
+\usepackage[utf8]{inputenc}
+\usepackage[left=22mm, right=22mm, top=20mm, bottom=20mm, headheight=40pt, headsep=10pt]{geometry}  % Set margin of page
+\usepackage[parfill]{parskip}  % Set spacing between paragraphs
+\usepackage{amsmath}  % For the equation environment
+\usepackage{graphicx}  % Required for inserting images
+\usepackage[dvipsnames]{xcolor}  % Access color codes
+\usepackage[colorlinks=true]{hyperref}  % Enable hyperlink
+\usepackage{cleveref}  % Enable easy references to sections, figures, and tables
+\usepackage{minted}  % Enable code formatting in LaTeX
+\usepackage{changepage}  % Required for \adjustwidth
+\usepackage{caption}
+\usepackage{enumitem}  % Requried for changing configurations for list
+\usepackage{lmodern}  % For \texttt font style
+\usepackage{booktabs}  % For table formatting
+\usepackage{multirow}  % Required for \multirow in tables
+\usepackage{emoji}  % Required for Hugging Face emoji
+\usepackage[numbers, sort&compress]{natbib}  % For citations and references
+\bibliographystyle{unsrtnat}
+\usepackage[utf8]{inputenc}
+
+% Define macros, including color codes and macros
+\definecolor{YonseiBlue}{HTML}{183772}
+
+% TODO: Replace "CAS2105 Homework 6: Mini AI Pipeline Project \emoji{hugging-face}" with your report title
+\title{Mini AI Pipeline Project: Differentiating Clickbaits}  % Title
+
+
+% TODO: Replace "Your Name (Your Student ID)" with your name and student ID
+\author{Yejun Noh (2021147585)}
+
+
+% Redefine title style
+\makeatletter
+  \def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{flushleft}%
+  {\color{YonseiBlue}\rule{\textwidth}{2pt}}
+  \vskip 5pt%
+  \let \footnote \thanks
+    {\Large \bf \@title \par}%
+    \vskip 1.5em%
+    {\normalsize \bf \lineskip .5em% 
+        \@author
+        \vskip 2pt%
+        \par}
+    {\color{YonseiBlue}\rule{\textwidth}{2pt}}
+    \vskip 1.5em
+  \end{flushleft}%
+  }
+\makeatother
+
+
+
+\begin{document}
+\maketitle
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+% --- TODO: Students fill this in ---
+% Describe your chosen task and why it is interesting.
+% Keep the explanation clear enough for a classmate to understand.
+
+Clickbait headlines are designed to attract attention and encourage users to click on a link, often using exaggerated language.It is therefore necessary to differentiate what is clickbait or not.
+
+This project implements a simple \textbf{AI pipeline} for clickbait detection.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Task Definition}
+\label{sec:definition}
+\begin{itemize}
+    \item \textbf{Task description:} What are you trying to do? (e.g., ``Classify news headlines into \{sports, politics, tech\}'').
+    \item \textbf{Motivation:} Why is this task interesting or useful?
+    \item \textbf{Input / Output:} What does the model see, and what should it produce?
+    \item \textbf{Success criteria:} How do you know if your system is ``good''?
+\end{itemize}
+
+\section{Methods}
+\label{sec:methods}
+
+This section includes both the na\"ive baseline and the improved AI pipeline.
+
+\subsection{Na\"ive Baseline}
+\label{subsec:baseline}
+
+Implement a simple method that does not rely on heavy models. Examples include:
+\begin{itemize}
+    \item Keyword-based text classification,
+    \item Simple color/shape heuristics for image tasks,
+    \item String-overlap–based retrieval.
+\end{itemize}
+
+In your report, explain:
+\begin{itemize}
+    \item How the baseline works,
+    \item Why it is considered na\"ive,
+    \item Expected failure cases.
+\end{itemize}
+
+\subsubsection*{Your Baseline (TODO)}
+\begin{itemize}
+    \item \textbf{Method description:} TODO
+    \item \textbf{Why na\"ive:} TODO
+    \item \textbf{Likely failure modes:} TODO
+\end{itemize}
+
+
+\subsection{AI Pipeline}
+\label{subsec:pipeline}
+
+Design a small pipeline using one or more pre-trained models. Examples include:
+
+\begin{itemize}
+    \item \textbf{Text:} embedding encoder + classifier, or a small transformer model,
+    \item \textbf{Retrieval:} embedding model + nearest-neighbor search,
+    \item \textbf{Vision:} pre-trained classifier (e.g., ViT-tiny).
+\end{itemize}
+
+A typical pipeline contains:
+\begin{enumerate}
+    \item Preprocessing,
+    \item Embedding or representation,
+    \item Decision/ranking component,
+    \item Optional post-processing.
+\end{enumerate}
+
+Fine-tuning large models is not required; inference-only usage is sufficient.
+
+\subsubsection*{Your Pipeline (TODO)}
+\begin{itemize}
+    \item \textbf{Models used:} TODO
+    \item \textbf{Pipeline stages:} TODO
+    \item \textbf{Design choices and justification:} TODO
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experiments}
+\label{sec:experiments}
+
+
+\subsection{Datasets}
+\label{sec:experiments:datasets}
+
+% --- TODO: Students fill this in ---
+% Describe your dataset clearly.
+
+You may use a small public dataset (e.g., from \texttt{datasets}) or construct your own. 
+In this section, describe:
+
+\begin{itemize}
+    \item \textbf{Dataset source}: where it comes from.
+    \item \textbf{Size}: number of examples used.
+    \item \textbf{Splits}: how you divided train/validation/test.
+    \item \textbf{Preprocessing}: e.g., tokenization, resizing, truncation, normalization.
+\end{itemize}
+
+\subsection*{Your Dataset Description (TODO)}
+\begin{itemize}
+    \item \textbf{Source:} TODO
+    \item \textbf{Total examples:} TODO
+    \item \textbf{Train/Test split:} TODO
+    \item \textbf{Preprocessing steps:} TODO
+\end{itemize}
+
+
+\subsection{Metrics}
+\label{sec:experiments:metrics}
+
+Use at least one quantitative metric appropriate for your task:
+\begin{itemize}
+    \item \textbf{Classification:} accuracy, precision, recall, F1,
+    \item \textbf{Retrieval:} precision@k, recall@k,
+    \item \textbf{Simple generation:} exact match, ROUGE-1.
+\end{itemize}
+
+\textcolor{gray}{It’s worth considering how the metrics you select align with your tasks.}
+
+\subsection{Results}
+\label{sec:experiments:results}
+
+Report:
+\begin{itemize}
+    \item Metric values for baseline vs.\ pipeline,
+    \item A results table,
+    \item At least three qualitative examples.
+\end{itemize}
+
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Method} & \textbf{Metric 1} & \textbf{Metric 2 (optional)} \\
+\midrule
+Baseline & TODO & TODO \\
+AI Pipeline & TODO & TODO \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+If you want to visualize results with any other than tables, refer to below links
+\begin{itemize}
+    \item \href{https://matplotlib.org/stable/tutorials/pyplot.html}{Matplotlib official tutorial: Introduction to \texttt{pyplot}}
+    \item \href{https://matplotlib.org/stable/gallery/index.html}{Matplotlib example gallery (many bar/line/scatter plots with source code)}
+    \item \href{https://www.kaggle.com/code/prashant111/matplotlib-tutorial-for-beginners}{Kaggle notebook: Matplotlib tutorial for beginners (interactive code)}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Reflection and Limitations}
+\label{sec:reflection}
+
+Write approximately 6--10 sentences reflecting on:
+\begin{itemize}
+    \item What worked better than expected,
+    \item What failed or was difficult,
+    \item How well your metric captured ``quality'',
+    \item What you would try next with more time or compute.
+\end{itemize}
+
+\subsection*{Your Reflection (TODO)}
+% Students write freely here.
+TODO
+
+
+\bibliography{references}
+
+\end{document}
